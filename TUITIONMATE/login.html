@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TuitionMate</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="TuitionMate Logo">
+                <span>TuitionMate</span>
+            </a>
+
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="signup.html" class="signup-btn">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-section">
+
+        <div class="login-card">
+
+            <img src="images/logo.png"
+                 alt="TuitionMate Logo"
+                 class="login-logo">
+
+            <h1>TuitionMate</h1>
+            <p class="login-subtitle">Login to your account </p>
+           <form id="loginForm" autocomplete="on">
+
+    <label for="email">Email Address</label>
+
+    <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+        required
+    >
+
+    <label for="password">Password</label>
+
+    <div class="password-box">
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+        >
+
+        <button
+            type="button"
+            class="show-password"
+            onclick="togglePassword()">
+            👁
+        </button>
+    </div>
+
+    <div class="forgot">
+        <a href="#">Forgot password?</a>
+    </div>
+
+    <button type="submit">Login</button>
+
+</form>
+
+            <div class="or">
+                <span>OR</span>
+            </div>
+
+            <button class="google-btn" type="button" onclick="googleLogin()">
+    <img src="images/google-logo.jpeg" alt="Google">
+    <span>Continue with Google</span>
+</button>
+
+            <p class="signup-text">
+                Don't have an account?
+                <a href="signup.html">Sign Up</a>
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                <img src="images/logo.png" alt="TuitionMate Logo">
+
+                <div>
+                    <h3>TuitionMate</h3>
+                    <p>Learn Today, Lead Tomorrow</p>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+
+           <div class="social-icons">
+    <a href="#" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <a href="#" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a href="#" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+</div> 
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 TuitionMate. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+function togglePassword() {
+    const password = document.getElementById("password");
+    const button = document.querySelector(".show-password");
+
+    if (password.type === "password") {
+        password.type = "text";
+        button.textContent = "🙈";
+    } else {
+        password.type = "password";
+        button.textContent = "👁";
+    }
+}
+
+function googleLogin() {
+    alert("Google Login clicked!");
+}
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const savedUser = JSON.parse(localStorage.getItem("tuitionmateUser"));
+
+    if (!savedUser) {
+        alert("No account found. Please sign up first.");
+        return;
+    }
+
+    if (email === savedUser.email && password === savedUser.password) {
+        alert("Login successful! Welcome, " + savedUser.name + "!");
+        window.location.href = "index.html";
+    } else {
+        alert("Incorrect email or password.");
+    }
+});
+</script>
+</body>
+</html>
